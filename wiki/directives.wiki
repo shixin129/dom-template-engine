@@ -5,3 +5,9 @@
   @{表达式}
 
   详细的指令说明,参见 [index 首页]
+
+||  模板内容  ||  数据内容  ||  生成内容 ||
+||  <div _hp_="set_data.userName">user's name\</div>    ||  userName = "Tom"     ||  <div>Tom</div>   ||   
+||  <div _hp_="set_data.text">...</div>              ||  text = "<b>hello</b>"     ||  <div>&lt;b&gt;hello&lt;/b&gt;</div>  ||    
+||  <div _hp_="set_data.'Welcome '+userName">...</div>  || userName = "Tom" || <div>Welcome Tom</div>  ||
+||  <div _hp_="set_data.100+userId">...</div>  || userId=20 || <div>120</div> ||
