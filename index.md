@@ -1,0 +1,42 @@
+# 概述 #
+
+## 功能 ##
+
+DOM Template Engine (以下简称模板引擎)实现了将数据渲染到页面模板并形成最终页面的功能. 模板引擎建立在w3c xml规范基础之上,因此可以应用于符合w3c规范的xml处理场合.模板引擎可以简化将数据填充到页面的过程,并能有效降低XMLC生成类的复杂程度.
+该模板引擎的主要特性如下:
+
+  * 简化的指令集合
+  * DOM节点作用范围包括 Element,Text,Attribute 节点类型
+  * 在 Text 和 Attribute 节点中可以实现JSP标签风格的部分嵌入数据形式
+  * 支持无限级循环嵌套
+  * 支持Object作为数据模型
+  * 通过拦截器实现模板驱动的数据生成方式
+  * 兼容OGNL的表达式语言,但优于OGNL的性能 (表达式使用MVEL解析)
+
+## 应用示例 ##
+
+模板引擎的引用比较简单,例如:
+```
+  //得到XML 文档\
+  Document document = ... ;\
+  //模型生成\
+  Map model = new HashMap();\
+  model.put("ints",new int[]{1,2,3,4,5,6,7,8,9});\
+  model.put("userName","DTE");\
+  model.put("createTime",new Date());\
+  //渲染\
+  PresentationTemplateManager.getInstance().render(document, document, model ,"");
+```
+
+## 应用条件 ##
+
+模板引擎可以应用在任何符合w3c规范的XML文档之上,默认情况下模板引擎在应用时不需要Servlet上下文.
+
+# 指令 #
+
+指令是指嵌入在页面模板中,用于指导数据渲染的特殊标记,形式上包括两种:
+
+  * 附加在Element节点上的 "_hp_" 属性
+> 例如: <div>User's name</div>
+  * 出现在Text和Attribute节点中的 "@{...}" 属性
+> 例如: <span>@{userName}</span> 及 <a href='http://localhost/profile.ot?uid=@{user.id}'>open user's profile</a>
